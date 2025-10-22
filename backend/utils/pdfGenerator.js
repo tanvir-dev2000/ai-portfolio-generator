@@ -8,7 +8,15 @@ async function generatePDF(html, outputPath) {
   try {
     browser = await puppeteer.launch({
       headless: 'new',
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--disable-gpu',
+      ],
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || 
+                      (process.env.NODE_ENV === 'production' ? '/usr/bin/chromium-browser' : undefined),
     });
     
     const page = await browser.newPage();

@@ -8,8 +8,13 @@ const portfolioRoutes = require('./routes/portfolioRoutes');
 const app = express();
 
 // Middleware
+const cors = require('cors');
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: [
+    'http://localhost:3000',
+    process.env.CLIENT_URL || 'https://ai-portfolio-frontend.onrender.com',
+  ],
   credentials: true,
 }));
 app.use(express.json());

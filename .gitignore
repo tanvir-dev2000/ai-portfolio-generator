@@ -111,3 +111,42 @@ firebase-service-account.json
 !package.json
 !package-lock.json
 
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment & Secrets
+.env
+**/.env
+*.env
+.env.local
+.env.production
+
+# Firebase Secret Files
+backend/firebase-service-account.json
+firebase-service-account.json
+**/firebase-service-account.json
+
+# Backend
+backend/temp/
+backend/uploads/
+
+# Client
+client/build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
