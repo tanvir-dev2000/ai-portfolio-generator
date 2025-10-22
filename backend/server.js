@@ -8,15 +8,14 @@ const portfolioRoutes = require('./routes/portfolioRoutes');
 const app = express();
 
 // Middleware
-const cors = require('cors');
-
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    process.env.CLIENT_URL || 'https://ai-portfolio-frontend.onrender.com',
-  ],
+    process.env.CLIENT_URL || process.env.FRONTEND_URL,
+  ].filter(Boolean),
   credentials: true,
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -29,6 +28,7 @@ const uploadsDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir);
 }
+
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir);
 }
