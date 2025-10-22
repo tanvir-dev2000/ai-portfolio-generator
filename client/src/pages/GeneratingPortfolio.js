@@ -5,6 +5,8 @@ import { auth } from '../config/firebase';
 import toast from 'react-hot-toast';
 import './GeneratingPortfolio.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const GeneratingPortfolio = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -67,7 +69,7 @@ const GeneratingPortfolio = () => {
 
             const token = await auth.currentUser.getIdToken();
             const response = await axios.post(
-                'http://localhost:5000/api/portfolio/create',
+                `${API_URL}/api/portfolio/create`,
                 formDataToSend,
                 {
                     headers: {

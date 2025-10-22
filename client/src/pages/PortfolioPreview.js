@@ -5,6 +5,8 @@ import { auth } from '../config/firebase';
 import toast from 'react-hot-toast';
 import './PortfolioPreview.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const PortfolioPreview = () => {
   const { id } = useParams();
   const location = useLocation();
@@ -28,7 +30,7 @@ const PortfolioPreview = () => {
     try {
       const token = await auth.currentUser.getIdToken();
       const response = await axios.get(
-        `http://localhost:5000/api/portfolio/${id}`,
+        `${API_URL}/api/portfolio/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -60,7 +62,7 @@ const PortfolioPreview = () => {
 
     // Call backend to generate PDF directly without saving
     const response = await axios.post(
-      'http://localhost:5000/api/portfolio/download-pdf',
+      `${API_URL}/api/portfolio/download-pdf`,
       { htmlContent },
       {
         responseType: 'blob',
