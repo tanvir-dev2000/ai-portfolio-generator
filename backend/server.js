@@ -7,13 +7,17 @@ const portfolioRoutes = require('./routes/portfolioRoutes');
 
 const app = express();
 
-// Middleware
+// Middleware - FIXED CORS
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    process.env.CLIENT_URL || process.env.FRONTEND_URL,
-  ].filter(Boolean),
+    'https://ai-portfolio-frontend-by0d.onrender.com', // Your frontend URL
+    process.env.FRONTEND_URL,
+    process.env.CLIENT_URL,
+  ].filter(Boolean), // Remove undefined values
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 app.use(express.json());
