@@ -6,7 +6,6 @@ async function generatePDF(html, outputPath) {
   let browser;
 
   try {
-    // ✅ FIXED HERE:
     browser = await puppeteer.launch({
       headless: 'new',
       args: [
@@ -16,13 +15,10 @@ async function generatePDF(html, outputPath) {
         '--disable-accelerated-2d-canvas',
         '--disable-gpu',
       ],
-      // ❌ REMOVE executablePath: don't point to /usr/bin/chromium-browser
-      // Puppeteer now uses its own Chromium automatically
     });
 
     const page = await browser.newPage();
 
-    // Inject print-friendly CSS BEFORE setting content
     const printFriendlyHTML = `
       <style>
         * {
